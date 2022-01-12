@@ -1,1 +1,1 @@
-
+Christopher Tan (1/12 11:45): Set up basic files (client.h, client.c, server.h, server.c, and makefile) including "includes" and make.
