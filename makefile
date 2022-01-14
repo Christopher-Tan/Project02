@@ -1,16 +1,17 @@
 All: server client
 	rm *.o
 
-server: server.o server.h
-	gcc -o server server.o network.o server.h
+server: server.o networking.o
+	gcc -o server server.o networking.o
+
+client: client.o networking.o
+	gcc -o client client.o networking.o
+
+networking.o: networking.c networking.h
+	gcc -c networking.c
 
 server.o: server.c server.h
 	gcc -c server.c
 
-client: client.o client.h
-	gcc -o client client.o network.o client.h
-
 client.o: client.c client.h
 	gcc -c client.c
-
-network.o: 
