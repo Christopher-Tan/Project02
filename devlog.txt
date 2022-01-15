@@ -1,3 +1,4 @@
 Christopher Tan (1/12 11:45): Set up basic files (client.h, client.c, server.h, server.c, and makefile) including "includes" and make.
 Christopher Tan (1/13 11:45): Set up server side networking code (server_setup and server_accept)
-Christopher Tan (1/13 19:22): Filled in client side code
+Christopher Tan (1/13 19:22): Filled in client side connection code
+Christopher Tan (1/15 18:32): Completed select server, no current game mechanics though
