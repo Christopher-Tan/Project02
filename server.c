@@ -1,6 +1,13 @@
 #include "server.h"
 #include <sys/select.h>
 
+void print_list(struct node *start) {
+	while (start) {
+		printf("| %d vs %d ", start -> fd1, start -> fd2);
+		start = start -> next;
+	}
+	printf("\n");
+}
 struct node * insert_node(struct node* start, int fd1, int fd2) {
     struct node *n = malloc(sizeof(struct node));
     n -> fd1 = fd1;
@@ -34,6 +41,7 @@ struct node * remove_node(struct node* start, struct node* node) {
             struct node *temp = start -> next -> next;
             free(start -> next);
             start -> next = temp;
+			break;
         }
         start = start -> next;
     }
@@ -93,21 +101,18 @@ int main() {
 						//transfer move to other player (as determined by pairing, maybe add another check that the same client did not send two moves).
 						write(opponent(matches, fd), move, sizeof(move));
 					} else {
-						printf("Hi\n");
-						struct node *pairing = search(matches, fd);
-						printf("Hi\n");
 						FD_CLR(fd, &clients);
 						close(fd);
-						printf("Hi\n");
+						struct node *pairing = search(matches, fd);
 						if (pairing) {
 							//remove the other connected client as well.
 							int opp = opponent(matches, fd);
-							printf("Hi\n");
+							move[0] = 0;
+							move[1] = 0;
+							write(opp, move, sizeof(move));
 							FD_CLR(opp, &clients);
 							close(opp);
-							printf("Hi\n");
-							remove_node(matches, pairing);
-							printf("Hi\n");
+							matches = remove_node(matches, pairing);
 							printf("%d and %d disconnected\n", fd, opp);
 						} else {
 							queue[0] = 0;
