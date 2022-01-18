@@ -4,3 +4,4 @@ Christopher Tan (1/13 19:22): Filled in client side connection code
 Christopher Tan (1/15 18:32): Completed select server, no current game mechanics though
 Christopher Tan (1/15 21:12): Tried to implement linked list and pairing system, as well as communication, encountering multiple errors at the moment.
 Christopher Tan (1/15 23:00): Fixed errors, turns out the only errors were forgetting to set the linked list = remove_node() and forgetting a break statement in my recursion
+Christopher Tan (1/18 11:45): Set up the client for move exchanges
