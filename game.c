@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <SDL2/SDL.h>
 #include "game.h"
-#include "moving.h"
-#include "render.h"
 
 int main(){
     if (SDL_Init(SDL_INIT_VIDEO) != 0){

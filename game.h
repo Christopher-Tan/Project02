@@ -9,6 +9,8 @@
 #define game_h
 #include <stdlib.h>
 #include <stdio.h>
+#include "render.h"
+#include "moving.h"
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 #define C 3

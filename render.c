@@ -4,9 +4,7 @@
 //
 //  Created by Theodore Fahey on 1/17/22.
 //
-#include <SDL2/SDL.h>
 #include "render.h"
-#include "game.h"
 const SDL_Color GRID_COLOR = {.r = 255, .g = 255 , .b = 255};
 const SDL_Color X_COLOR = { .r = 255, .g = 0, .b = 0};
 const SDL_Color O_COLOR = { .r = 50 , .g = 100, .b = 255};
@@ -37,34 +35,41 @@ void render_x(SDL_Renderer * renderer, int box, int row, int column, const SDL_C
     SDL_RenderDrawLine(renderer, center_x - half_box_side, center_y - half_box_side, center_x + half_box_side, center_y + half_box_side);
     SDL_RenderDrawLine(renderer, center_x + half_box_side, center_y - half_box_side, center_x - half_box_side, center_y + half_box_side);
 }
-void draw_circle(SDL_Renderer * renderer, int x, int y, int radius, const SDL_Color * color){
-    int x2, y2, d;
-    x2 = 0;
-    y2 = radius;
-    d = radius- 1;
-    SDL_SetRenderDrawColor(renderer, color->r, color->g, color->b, 255);
-    while( y2 >= x2){
-          SDL_RenderDrawPoint(renderer, x + x2, y + y2);
-          SDL_RenderDrawPoint(renderer, x + y2, y + x2);
-          SDL_RenderDrawPoint(renderer, x - x2, y + y2);
-          SDL_RenderDrawPoint(renderer, x - y2, y + x2);
-          SDL_RenderDrawPoint(renderer, x + x2, y - y2);
-          SDL_RenderDrawPoint(renderer, x + y2, y - x2);
-          SDL_RenderDrawPoint(renderer, x - x2, y - y2);
-          SDL_RenderDrawPoint(renderer, x - y2, y - x2);
-          if (d >= 2*x2) {
-                    d -= 2*x2 + 1;
-                    x2 +=1;
-                }
-        else if (d < 2 * (radius - y2)) {
-                    d += 2 * y2 - 1;
-                    y2 -= 1;
-                }
-        else{
-            y2 -= 1;
-          x2 += 1;
-        }
-    }
+void draw_circle(SDL_Renderer * renderer, int centreX, int centreY, int radius, const SDL_Color *color)
+{
+   const int diameter = (radius * 2);
+
+   int x = (radius - 1);
+   int y = 0;
+   int tx = 1;
+   int ty = 1;
+   int error = (tx - diameter);
+	SDL_SetRenderDrawColor(renderer, color->r, color->g, color->b, 255);
+   while (x >= y)
+   {
+      SDL_RenderDrawPoint(renderer, centreX + x, centreY - y);
+      SDL_RenderDrawPoint(renderer, centreX + x, centreY + y);
+      SDL_RenderDrawPoint(renderer, centreX - x, centreY - y);
+      SDL_RenderDrawPoint(renderer, centreX - x, centreY + y);
+      SDL_RenderDrawPoint(renderer, centreX + y, centreY - x);
+      SDL_RenderDrawPoint(renderer, centreX + y, centreY + x);
+      SDL_RenderDrawPoint(renderer, centreX - y, centreY - x);
+      SDL_RenderDrawPoint(renderer, centreX - y, centreY + x);
+
+      if (error <= 0)
+      {
+         ++y;
+         error += ty;
+         ty += 2;
+      }
+
+      if (error > 0)
+      {
+         --x;
+         tx += 2;
+         error += (tx - diameter);
+      }
+   }
 }
 void render_o(SDL_Renderer * renderer, int box, int row, int column, const SDL_Color * color){
     float half_box_side = fmin(CELL_WIDTH, CELL_HEIGHT) * 0.35;

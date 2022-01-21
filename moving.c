@@ -4,10 +4,7 @@
 //
 //  Created by Theodore Fahey on 1/17/22.
 //
-#include <SDL2/SDL.h>
-
 #include "moving.h"
-#include "game.h"
 void switch_player(struct game_t *game){
     if (game -> player == PLAYER_X){
         game -> player = PLAYER_O;

@@ -15,3 +15,18 @@ server.o: server.c server.h
 
 client.o: client.c client.h
 	gcc -c client.c
+
+test: game
+	./game
+
+game: game.o render.o moving.o
+	gcc -o game game.o render.o moving.o `sdl2-config --cflags --libs` -Wall
+
+game.o: game.c game.h
+	gcc -c game.c
+
+render.o: render.c render.h
+	gcc -c render.c
+
+moving.o: moving.c moving.h
+	gcc -c moving.c
