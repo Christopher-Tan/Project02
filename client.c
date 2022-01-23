@@ -29,7 +29,7 @@ int main() {
     SDL_RenderClear(renderer);
     rendering_game(renderer, &game);
     SDL_RenderPresent(renderer);
-	while (1) {
+	while (!game.state) {
 		if (turn) {
 			int valid = 0;
 			while (!valid) {
@@ -48,6 +48,7 @@ int main() {
 				}
 			}
 			write(server, move, sizeof(move));
+			while (SDL_PollEvent(&first)) {}
 		} else {
 			read(server, move, sizeof(move));
 			if (!move[0] && !move[1]) {
@@ -56,7 +57,7 @@ int main() {
             edit_board(&game, move[0], move[1], (game.player) % 2 + 1);
 		}
         //if not quit
-		game.state = victory(game.board);
+	game.state = victory(game.board);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
         rendering_game(renderer, &game);
