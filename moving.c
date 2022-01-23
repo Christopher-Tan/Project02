@@ -1,41 +1,21 @@
 #include "moving.h"
-void switch_player(struct game_t *game){
-    if (game -> player == PLAYER_X){
-        game -> player = PLAYER_O;
-    }
-    else if (game -> player == PLAYER_O){
-        game -> player = PLAYER_X;
-    }
+
+int on_click(struct game_t *game, int row, int column, char move[2]) {
+    int outerbox = (column / 3) + 3 * (row / 3);
+    row = row % 3;
+    column = column % 3;
+    int innerbox = row * 3 + column;
+    move[0] = outerbox;
+    move[1] = innerbox;
+    return edit_board(game, outerbox, innerbox, game -> player);
 }
-void player_turn(struct game_t *game, int box, int secondbox){
-    if (game->board[box][secondbox] == EMPTY){
-        if (box == game -> lastbox || game -> lastbox == -1){
-            
-        
-            game->board[box][secondbox] = game -> player;
-            game -> lastbox = secondbox;
-            switch_player(game);
-        }
+
+int edit_board(struct game_t *game, int outerbox, int innerbox, int player) {
+    if (game -> board[outerbox][innerbox] || !(outerbox == game -> lastbox || game -> lastbox == -1)) {
+        return 0;
+    } else {
+        game -> board[outerbox][innerbox] = player;
+        game -> lastbox = innerbox;
+        return 1;
     }
-}
-void on_click(struct game_t *game, int row, int column){
-    if (game -> state == RUNNING_STATE){
-        int box = (column / 3) + 3 * (row / 3);
-        row = row % 3;
-        column = column % 3;
-        int secondbox = row * 3 + column;
-        
-        player_turn(game, box, secondbox);
-    }
-}
-void reset_game(struct game_t * game){
-    int i, j;
-    for (i = 0; i < 9; i++ ){
-        for (j = 0; j < 9; j++){
-            game -> board[i][j] = EMPTY;
-        }
-    }
-    game -> player = PLAYER_X;
-    game -> state = RUNNING_STATE;
-    
 }
