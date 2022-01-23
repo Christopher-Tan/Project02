@@ -20,7 +20,7 @@
 #define CELL_WIDTH (SCREEN_WIDTH / 9)
 
 struct game_t {
-    int board[9][9];
+    char board[9][9];
     int player;
     int state;
     int lastbox; 
