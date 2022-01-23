@@ -57,12 +57,26 @@ int main() {
             edit_board(&game, move[0], move[1], (game.player) % 2 + 1);
 		}
         //if not quit
-	game.state = victory(game.board);
+	int state = victory(game.board);
+        if (game.player == state){
+            game.state = WON;
+        }
+        else if (state == 2 || state == 1){
+            game.state = LOST;
+        }
+        else if (state == 4){ 
+            game.state = TIE;
+        }
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
         rendering_game(renderer, &game);
         SDL_RenderPresent(renderer);
 		//display win, if applicable
+	 if (game.state != 0){
+            SDL_Delay(5000);
+            SDL_Quit();
+
+        }
 		turn = !turn;
 	}
 	return 0;
