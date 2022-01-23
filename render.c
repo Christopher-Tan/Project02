@@ -72,7 +72,7 @@ void render_o(SDL_Renderer * renderer, int box, int row, int column, const SDL_C
     draw_circle(renderer, center_x, center_y, half_box_side, color);
     
 }
-void render_board(SDL_Renderer * renderer, const int board[9][9], const SDL_Color *player_x_color, const SDL_Color *player_o_color){
+void render_board(SDL_Renderer * renderer, const char board[9][9], const SDL_Color *player_x_color, const SDL_Color *player_o_color){
     int i;
     int j;
     for (i = 0; i < 9; i++){
