@@ -25,7 +25,10 @@ int main() {
     struct game_t game = {{{}}, move[1], RUNNING_STATE, -1};
     SDL_Event first;
 	SDL_PollEvent(&first);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
     rendering_game(renderer, &game);
+    SDL_RenderPresent(renderer);
 	while (1) {
 		if (turn) {
 			int valid = 0;
