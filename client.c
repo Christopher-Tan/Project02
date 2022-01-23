@@ -36,11 +36,15 @@ int main() {
 				while (SDL_PollEvent(&first)) {
 					switch (first.type) {
 						case SDL_QUIT:
+							valid = 1;
 							game.state = QUIT_STATE;
+							break;
 						case SDL_MOUSEBUTTONDOWN:
 							valid = on_click(&game, first.button.y / CELL_HEIGHT, first.button.x / CELL_WIDTH, move);
+							break;
 						default: {}
 					}
+					break;
 				}
 			}
 			write(server, move, sizeof(move));
