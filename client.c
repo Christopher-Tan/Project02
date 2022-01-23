@@ -25,19 +25,21 @@ int main() {
     struct game_t game = {{{}}, move[1], RUNNING_STATE, -1};
     SDL_Event first;
 	SDL_PollEvent(&first);
+    rendering_game(renderer, &game);
 	while (1) {
 		if (turn) {
-            while (SDL_PollEvent(&first)) {
-                switch (first.type) {
-                    case SDL_QUIT:
-                        game.state = QUIT_STATE;
-                    case SDL_MOUSEBUTTONDOWN:
-                        if (on_click(&game, first.button.y / CELL_HEIGHT, first.button.x / CELL_WIDTH, move)) {
-                            break;
-                        }
-                    default: {}
-                }
-            }
+			int valid = 0;
+			while (!valid) {
+				while (SDL_PollEvent(&first)) {
+					switch (first.type) {
+						case SDL_QUIT:
+							game.state = QUIT_STATE;
+						case SDL_MOUSEBUTTONDOWN:
+							valid = on_click(&game, first.button.y / CELL_HEIGHT, first.button.x / CELL_WIDTH, move);
+						default: {}
+					}
+				}
+			}
 			write(server, move, sizeof(move));
 		} else {
 			read(server, move, sizeof(move));
