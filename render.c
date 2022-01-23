@@ -1,7 +1,9 @@
 #include "render.h"
 const SDL_Color GRID_COLOR = {.r = 255, .g = 255 , .b = 255};
-const SDL_Color X_COLOR = { .r = 255, .g = 0, .b = 0};
-const SDL_Color O_COLOR = { .r = 50 , .g = 100, .b = 255};
+const SDL_Color X_COLOR = {.r = 255, .g = 0, .b = 255};
+const SDL_Color O_COLOR = {.r = 0, .g = 0, .b = 255};
+const SDL_Color WIN_COLOR = { .r = 0, .g = 255, .b = 0};
+const SDL_Color LOSE_COLOR = { .r = 255 , .g = 0, .b = 0};
 const SDL_Color TIE_COLOR = { .r = 100, .g = 100, .b = 100};
 void render_grid(SDL_Renderer * renderer, const SDL_Color *color){
     SDL_SetRenderDrawColor(renderer, color->r, color->g, color->b, 255);
@@ -95,10 +97,46 @@ void render_running_state(SDL_Renderer * renderer, struct game_t *game){
     render_board(renderer, game-> board, &X_COLOR, &O_COLOR);
     
 }
+void render_win(SDL_Renderer * renderer, struct game_t * game){
+   // SDL sucks
+}
+void render_lose(SDL_Renderer * renderer, struct game_t * game){
+    int width1 =SCREEN_WIDTH /4 * 1.15;
+    SDL_Rect firstrect = {width1, SCREEN_HEIGHT / 4, SCREEN_WIDTH/10, SCREEN_HEIGHT /3 * 2};
+    SDL_SetRenderDrawColor(renderer, 255, 0,0,255);
+    SDL_Rect SecondRect = {width1, SCREEN_HEIGHT / 12 * 11, SCREEN_WIDTH/2, SCREEN_HEIGHT/10};
+    SDL_RenderFillRect(renderer, &firstrect);
+    SDL_RenderFillRect(renderer, &SecondRect);
+    
+}
 
 void render_game_over(SDL_Renderer * renderer, struct game_t * game, const SDL_Color * color){
     render_grid(renderer, color);
     render_board(renderer, game -> board, color, color );
+    if (game -> state == LOST){
+        render_lose(renderer, game);
+    }
+   
+   
+    
+//    switch (game -> state){
+//        case WON:
+//            SDL_Surface * imgwon = SDL_LoadBMP("winscreen.bmp");
+//            SDL_Texture * textwon = SDL_CreateTextureFromSurface(renderer, imgwon);
+//            SDL_RenderCopy(renderer, textwon, NULL, NULL);
+////            break;
+//        case LOST:
+//            SDL_Surface * imglost = SDL_LoadBMP("LoseScreen.bmp");
+//            SDL_Texture * textlost = SDL_CreateTextureFromSurface(renderer, imglost);
+//            SDL_RenderCopy(renderer, textlost, NULL, NULL);
+//        case TIE:
+//            SDL_RenderCopy(renderer, texttie, NULL, NULL);
+//            SDL_Surface * imgtie = SDL_LoadBMP("tiescreen.bmp");
+//            SDL_Texture * texttie = SDL_CreateTextureFromSurface(renderer, imgtie);
+//            break;
+//    }
+
+    
     
 }
 void rendering_game(SDL_Renderer * renderer, struct game_t *game){
@@ -106,16 +144,22 @@ void rendering_game(SDL_Renderer * renderer, struct game_t *game){
         case RUNNING_STATE:
             render_running_state(renderer,game);
             break;
-        case X_PLAYER_WON:
-            render_game_over(renderer, game, &X_COLOR);
+        case WON:
+            render_game_over(renderer, game, &WIN_COLOR);
+            
             break;
-        case O_PLAYER_WON:
-            render_game_over(renderer, game, &O_COLOR);
+        case LOST:
+            render_game_over(renderer, game, &LOSE_COLOR);
+            
+
             break;
         case TIE:
             render_game_over(renderer, game, &TIE_COLOR);
+            
             break;
             
             
     }
 }
+
+
