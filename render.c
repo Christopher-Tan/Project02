@@ -90,18 +90,18 @@ void render_board(SDL_Renderer * renderer, const char board[9][9], const SDL_Col
     
     
 }
-void render_running_state(SDL_Renderer * renderer, const struct game_t *game){
+void render_running_state(SDL_Renderer * renderer, struct game_t *game){
     render_grid(renderer, &GRID_COLOR);
     render_board(renderer, game-> board, &X_COLOR, &O_COLOR);
     
 }
 
-void render_game_over(SDL_Renderer * renderer, const struct game_t * game, const SDL_Color * color){
+void render_game_over(SDL_Renderer * renderer, struct game_t * game, const SDL_Color * color){
     render_grid(renderer, color);
     render_board(renderer, game -> board, color, color );
     
 }
-void rendering_game(SDL_Renderer * renderer, const struct game_t *game){
+void rendering_game(SDL_Renderer * renderer, struct game_t *game){
     switch (game->state){
         case RUNNING_STATE:
             render_running_state(renderer,game);
