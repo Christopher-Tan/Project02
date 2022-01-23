@@ -1,9 +1,3 @@
-//
-//  render.c
-//  SDL PLS WORK
-//
-//  Created by Theodore Fahey on 1/17/22.
-//
 #include "render.h"
 const SDL_Color GRID_COLOR = {.r = 255, .g = 255 , .b = 255};
 const SDL_Color X_COLOR = { .r = 255, .g = 0, .b = 0};
