@@ -1,9 +1,3 @@
-//
-//  moving.c
-//  SDL PLS WORK
-//
-//  Created by Theodore Fahey on 1/17/22.
-//
 #include "moving.h"
 void switch_player(struct game_t *game){
     if (game -> player == PLAYER_X){

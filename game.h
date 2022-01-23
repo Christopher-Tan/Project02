@@ -1,9 +1,3 @@
-//
-//  game.h
-//  SDL PLS WORK
-//
-//  Created by Theodore Fahey on 1/17/22.
-//
 #include <SDL2/SDL.h>
 #ifndef game_h
 #define game_h
@@ -32,4 +26,4 @@ struct game_t {
     int lastbox; 
 };
 
-#endif /* game_h */
+#endif
