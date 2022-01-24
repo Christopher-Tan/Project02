@@ -2,8 +2,10 @@ Christopher Tan (1/12 11:45): Set up basic files (client.h, client.c, server.h, 
 Christopher Tan (1/13 11:45): Set up server side networking code (server_setup and server_accept)
 Christopher Tan (1/13 19:22): Filled in client side connection code
 Christopher Tan (1/15 18:32): Completed select server, no current game mechanics though
+Theodore Fahey (1/15 20:21): Figured out how to include SDL using xcode. Created a basic Window and Renderer
 Christopher Tan (1/15 21:12): Tried to implement linked list and pairing system, as well as communication, encountering multiple errors at the moment.
 Christopher Tan (1/15 23:00): Fixed errors, turns out the only errors were forgetting to set the linked list = remove_node() and forgetting a break statement in my recursion
+Theodore Fahey (1
 Christopher Tan (1/18 11:45): Set up the client for move exchanges
 Christopher Tan (1/21 11:45): Worked on importing SDL2 & improving circle algorithm
 Christopher Tan (1/22 23:45): Installed SDL2 on personal computers, used Theo's code to insert the SDL2 component of the game into the client's interface (meaning changing the makefile, client files, game.h, and doing clean up on project), finished the victory checking function.
