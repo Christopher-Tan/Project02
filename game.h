@@ -5,12 +5,12 @@
 #include <stdio.h>
 #include "render.h"
 #include "moving.h"
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 801
+#define SCREEN_HEIGHT 603
 #define C 3
 #define RUNNING_STATE 0
-#define X_PLAYER_WON 1
-#define O_PLAYER_WON 2
+#define WON 1
+#define LOST 2
 #define TIE 3
 #define QUIT_STATE 4
 #define EMPTY 0
