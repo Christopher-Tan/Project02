@@ -33,7 +33,7 @@ sudo apt-get install libsdl2-dev
 
 **Usage**  
 Install the package on all devices.  
-_Note: The server and client are not necessarily different devices, if this is the case, ignore the following step, unless you wish to change the port number._
+_Note: The server and client are not necessarily different devices, if this is the case, ignore the following step, unless you wish to change the port number._  
 On the server device, find its IP Address and an available port (default 9001), in the networking.h file of both devices, change the IP and PORT variables according to the ___server's___ configuration.  
 Run makefile.  
 On the server run ./server and on the clients run ./client
