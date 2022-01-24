@@ -6,6 +6,7 @@ int main() {
 	char move[2];
     read(server, move, sizeof(move));
 	int turn = move[1] % 2;
+	int counter = 0;
 	//SDL
 	if (SDL_Init(SDL_INIT_VIDEO) != 0){
       printf("Initializing SDL2 failed%s\n", SDL_GetError());
@@ -48,7 +49,7 @@ int main() {
 				}
 			}
 			write(server, move, sizeof(move));
-			while (SDL_PollEvent(&first)) {}
+            while (SDL_PollEvent(&first)) {}
 		} else {
 			read(server, move, sizeof(move));
 			if (!move[0] && !move[1]) {
@@ -56,29 +57,32 @@ int main() {
 			}
             edit_board(&game, move[0], move[1], (game.player) % 2 + 1);
 		}
-        //if not quit
-	int state = victory(game.board);
-        if (game.player == state){
-            game.state = WON;
-        }
-        else if (state == 2 || state == 1){
-            game.state = LOST;
-        }
-        else if (state == 4){ 
-            game.state = TIE;
-        }
+		counter++;
+		if (game.state == QUIT_STATE) {
+			break;
+		}
+		if (counter == 81) {
+			game.state = TIE;
+		}
+        int state = victory(game.board);
+        if (state) {
+            if (state == game.player) {
+				game.state = WON;
+            } else {
+				game.state = LOST;
+            }
+		}
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
         rendering_game(renderer, &game);
         SDL_RenderPresent(renderer);
 		//display win, if applicable
-	 if (game.state != 0){
-            SDL_Delay(5000);
-            SDL_Quit();
-
-        }
 		turn = !turn;
 	}
+    if (game.state != QUIT_STATE) {
+        SDL_Delay(5000);
+    }
+	SDL_Quit();
 	return 0;
 }
 //x = 1; o = 2;
