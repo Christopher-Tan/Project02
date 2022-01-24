@@ -40,7 +40,7 @@ On the server run ./server and on the clients run ./client
 
 ---
 
-**Bibliograhy** 
+***Bibliography***
 Major Credits to Tscoding and his Tic-Tac-Toe tutorial. Helped me get acquainted with SDL.
 https://www.youtube.com/watch?v=gCVMkKgs3uQ  
 Our circle drawing algorithm was taken from the following source.  
