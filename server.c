@@ -107,8 +107,7 @@ int main() {
 						if (pairing) {
 							//remove the other connected client as well.
 							int opp = opponent(matches, fd);
-							move[0] = 0;
-							move[1] = 0;
+							move[0] = 127;
 							write(opp, move, sizeof(move));
 							FD_CLR(opp, &clients);
 							close(opp);
