@@ -16,6 +16,8 @@ server.o: server.c server.h
 client.o: client.c client.h game.h
 	gcc -c client.c
 
+game.h: render.o moving.o
+
 render.o: render.c render.h
 	gcc -c render.c
 
