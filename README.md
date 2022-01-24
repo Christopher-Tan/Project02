@@ -10,7 +10,6 @@ Someone who wants to play Ultimate Tic-Tac-Toe would connect to a server that wi
 **Technical Design**: A main server accepts clients and uses select to communicate between players. The main server will handle new clients and pass moves between clients, there will be a record of opponent pairs. It will also leave precedence to the first player connected (this player will move first). The two subservers will block on reading from the client and be in charge of determining wins and losses.  
 
 **Important Concepts Utilized**: Memory allocation (our board will be an array of arrays, and our functions [verifying wins, sharing moves, and subfunctions]  will work correctly with this board), Working with files (reading and writing to clients and servers), Sockets (accepting and communicating with clients, usage of select permits the usage of one central server and no subservers), and potentially Semaphores, though that seems more like a precautionary measure for the moment.
-
 ---
 
 **Group Work Division**  
@@ -24,3 +23,7 @@ T: Mostly in charge of clients, graphics (including win/lose, turns, etc.), and 
 1/17: Finished with server side protocols  
 1/18: Finished with graphics (fully functioning game)  
 1/20: Improved graphics (more refined game)
+
+**Bibliograhy** 
+Major Credits to Tscoding and his Tic-Tac-Toe tutorial. Helped me get acquainted with SDL.
+https://www.youtube.com/watch?v=gCVMkKgs3uQ
