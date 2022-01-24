@@ -52,7 +52,7 @@ int main() {
             while (SDL_PollEvent(&first)) {}
 		} else {
 			read(server, move, sizeof(move));
-			if (move[0] == -1) {
+			if (move[0] == 127) {
 				return 0;
 			}
             edit_board(&game, move[0], move[1], (game.player) % 2 + 1);
