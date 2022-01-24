@@ -16,6 +16,13 @@ int edit_board(struct game_t *game, int outerbox, int innerbox, int player) {
     } else {
         game -> board[outerbox][innerbox] = player;
         game -> lastbox = innerbox;
+        int i;
+        for (i = 0; i < 9; i++) {
+            if (!(game -> board[innerbox][i])) {
+                return 1;
+            }
+        }
+        game -> lastbox = -1;
         return 1;
     }
 }
